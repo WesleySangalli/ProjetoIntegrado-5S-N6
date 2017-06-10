@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,11 +20,12 @@ public class DialogSelecaoDificuldade extends JDialog {
 
 	private static final long serialVersionUID = -8830086507712170306L;
 
-	private int dificuldade;
+	private int dificuldade = Selecionador.MEDIO;
+	private boolean selecionado = false;
 
 	public DialogSelecaoDificuldade(Frame owner) {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(new Dimension(400, 100));
+		setSize(new Dimension(400, 150));
 		setLocationRelativeTo(owner);
 		setLayout(new BorderLayout());
 		DialogSelecaoDificuldade.this.setAlwaysOnTop(true);
@@ -37,12 +39,12 @@ public class DialogSelecaoDificuldade extends JDialog {
 		selecao.add(facil);
 
 		JRadioButton medio = new JRadioButton("MÉDIO");
-		facil.addActionListener(selecionado -> this.dificuldade = Selecionador.MEDIO);
+		medio.addActionListener(selecionado -> this.dificuldade = Selecionador.MEDIO);
 		selecao.add(medio);
 		medio.setSelected(true);
 
 		JRadioButton dificil = new JRadioButton("DIFÍCIL");
-		facil.addActionListener(selecionado -> this.dificuldade = Selecionador.DIFICIL);
+		dificil.addActionListener(selecionado -> this.dificuldade = Selecionador.DIFICIL);
 		selecao.add(dificil);
 
 		ButtonGroup agrupamento = new ButtonGroup();
@@ -50,8 +52,12 @@ public class DialogSelecaoDificuldade extends JDialog {
 		agrupamento.add(medio);
 		agrupamento.add(dificil);
 
-		add(titulo, BorderLayout.NORTH);
-		add(selecao, BorderLayout.CENTER);
+		JButton btnInicar = new JButton("Inicar");
+		btnInicar.addActionListener(inicar -> {
+			this.setVisible(false);
+			this.selecionado = true;
+		});
+		add(btnInicar, BorderLayout.SOUTH);
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -64,12 +70,23 @@ public class DialogSelecaoDificuldade extends JDialog {
 			public void windowClosing(WindowEvent e) {
 				DialogSelecaoDificuldade.this.setVisible(false);
 			}
+
+			public void windowClosed(WindowEvent e) {
+				System.exit(0);
+			};
 		});
 
+		add(titulo, BorderLayout.NORTH);
+		add(selecao, BorderLayout.CENTER);
 		setVisible(true);
 	}
 
 	public int getDificuldade() {
-		return dificuldade;
+		return this.dificuldade;
 	}
+
+	public boolean isSelecionado() {
+		return selecionado;
+	}
+
 }
