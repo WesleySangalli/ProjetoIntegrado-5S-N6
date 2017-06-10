@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -58,22 +60,16 @@ public class DialogSelecaoDificuldade extends JDialog {
 			this.selecionado = true;
 		});
 		add(btnInicar, BorderLayout.SOUTH);
+		btnInicar.requestFocus();
 
-		this.addWindowListener(new WindowAdapter() {
+		this.addKeyListener(new KeyAdapter() {
 			@Override
-			public void windowDeactivated(WindowEvent e) {
-				DialogSelecaoDificuldade.this.setAlwaysOnTop(false);
-				DialogSelecaoDificuldade.this.toFront();
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					DialogSelecaoDificuldade.this.setVisible(false);
+					DialogSelecaoDificuldade.this.selecionado = true;
+				}
 			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				DialogSelecaoDificuldade.this.setVisible(false);
-			}
-
-			public void windowClosed(WindowEvent e) {
-				System.exit(0);
-			};
 		});
 
 		add(titulo, BorderLayout.NORTH);

@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Controlador {
 
 	private final String palavra;
-	private AtomicInteger tentativas = new AtomicInteger(7);
+	private AtomicInteger tentativas = new AtomicInteger(6);
 
 	public static final int CORRETO = 1;
 	public static final int ERRADO = 2;
