@@ -29,7 +29,7 @@ public class Selecionador{
 			case DIFICIL:
 				return selecionaDoArquivo("palavras\\dificil.txt");
 			default:
-				System.err.println("Nivel selecionado não existe");
+				System.err.println("Nivel selecionado nao existe");
 				return null;
 		}
 
@@ -48,7 +48,7 @@ public class Selecionador{
 		}catch(IOException e){
 			//TODO - tratar especifico;
 			e.printStackTrace();
-			throw new RuntimeException("Falaha ao selecionar palavra"); // TODO - Meio agressivo, acertar depois
+			throw new RuntimeException("Falha ao selecionar palavra"); // TODO - Meio agressivo, acertar depois
 		}
 	}
 
