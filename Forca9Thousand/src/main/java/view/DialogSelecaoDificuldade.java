@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
 
-import logica.Selecionador;
+import negocio.Selecionador;
 
 public class DialogSelecaoDificuldade extends JDialog {
 

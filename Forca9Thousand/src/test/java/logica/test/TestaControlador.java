@@ -3,7 +3,7 @@ package logica.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import logica.Controlador;
+import negocio.Controlador;
 
 public class TestaControlador {
 

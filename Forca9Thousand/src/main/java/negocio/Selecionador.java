@@ -1,4 +1,4 @@
-package logica;
+package negocio;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

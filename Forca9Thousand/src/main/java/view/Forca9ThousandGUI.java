@@ -18,8 +18,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import logica.Controlador;
-import logica.Selecionador;
+import negocio.Controlador;
+import negocio.Selecionador;
 
 public class Forca9ThousandGUI extends JFrame {
 
