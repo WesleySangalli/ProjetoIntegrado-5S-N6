@@ -2,10 +2,12 @@ package negocio;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Random;
-import java.nio.file.Files;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Random;
+
+import dao.PalavrasDAO;
 
 public class Selecionador{
 	
@@ -23,32 +25,32 @@ public class Selecionador{
 
 		switch(nivelSelecionado){
 			case FACIL:
-				return selecionaDoArquivo("palavras\\facil.txt");				
+				return selecionaDoArquivo(FACIL);				
 			case MEDIO:
-				return selecionaDoArquivo("palavras\\medio.txt");				
+				return selecionaDoArquivo(MEDIO);				
 			case DIFICIL:
-				return selecionaDoArquivo("palavras\\dificil.txt");
+				return selecionaDoArquivo(DIFICIL);
 			default:
-				System.err.println("Nivel selecionado n√£o existe");
+				System.err.println("Nivel selecionado n„o existe");
 				return null;
 		}
-
 	}
 
-	private String selecionaDoArquivo(String caminho){
+	private String selecionaDoArquivo(int dificuldade){
 		try{
 			
+			PalavrasDAO dao = new PalavrasDAO();
+			List<String> palavras = dao.selectPalavra(dificuldade);
+			
 			Random random = new Random();
-			int linha = random.nextInt(verificaLinhasDisponiveis(caminho));
-			String palavra = Files.readAllLines(Paths.get(caminho)).get(linha);
-
-			// TODO - checagem
+			int linha = random.nextInt(palavras.size());
+			String palavra = palavras.get(linha);
 
 			return palavra;
-		}catch(IOException e){
+		}catch(SQLException e){
 			//TODO - tratar especifico;
 			e.printStackTrace();
-			throw new RuntimeException("Falaha ao selecionar palavra"); // TODO - Meio agressivo, acertar depois
+			throw new RuntimeException("Falha ao selecionar palavra"); // TODO - Meio agressivo, acertar depois
 		}
 	}
 
